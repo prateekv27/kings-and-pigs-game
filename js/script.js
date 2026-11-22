@@ -74,6 +74,7 @@ function animate() {
     else if(key.a.pressed){
         player.velocity.x = -5
     }
+    
 
     player.draw();
     player.update();
@@ -81,20 +82,30 @@ function animate() {
 
 animate()
 window.addEventListener("keydown", (event) => {
-    switch (event.key) {
-        case 'w':
+    switch (event.code) {
+        case "KeyW":
             if (player.velocity.y === 0) {
-
                 player.velocity.y = -20
             }
-            break;
-            case "a":
-                key.a.pressed = true
+            break
 
-                break
-            case "d":
-                key.d.pressed = true
-                break;
+        case "KeyA":
+            key.a.pressed = true
+            break
+
+        case "KeyD":
+            key.d.pressed = true
+            break
     }
+})
+window.addEventListener("keyup", (event) => {
+    switch (event.code) {
+        case "KeyA":
+            key.a.pressed = false
+            break
 
+        case "KeyD":
+            key.d.pressed = false
+            break
+    }
 })
