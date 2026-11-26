@@ -14,7 +14,7 @@ class Player {
         this.width = 100
         this.height = 100
 
-        this.velocity = {
+        this.velocity  = {
             x: 0,
             y: 0
         }
@@ -47,6 +47,37 @@ class Player {
         }
     }
 }
+class Bagr {
+    constructor({ position, imagesrc }) {
+        this.position = position
+
+        this.image = new Image()
+        this.loaded = false
+
+        this.image.onload = () => {
+            this.loaded = true
+        }
+
+        this.image.src = imagesrc
+    }
+
+    draw() {
+        if (this.loaded) {
+            c.drawImage(
+                this.image,
+                this.position.x,
+                this.position.y
+            )
+        }
+    }
+}
+const b1 = new Bagr({
+    position : {
+        x : 0,
+        y: 0
+    },
+    imagesrc: "./img/backgroundLevel1.png"
+})
 
 const player = new Player()
 const key = {
@@ -67,6 +98,10 @@ function animate() {
 
     c.fillStyle = "white"
     c.fillRect(0, 0, canvas.width, canvas.height);
+    b1.draw();
+    CollisionBlocks.forEach(collisionBlock => {
+    collisionBlock.draw()
+})
     player.velocity.x = 0
     if(key.d.pressed){
         player.velocity.x = +5
